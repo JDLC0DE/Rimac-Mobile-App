@@ -2,9 +2,16 @@ import { Platform } from "react-native";
 
 export const Colors = {
   primary: "#F7052D",
+  blueBerry: "#4F4FFF",
+  success: "#389E0D",
   common: {
     black: "#000",
     white: "#fff",
+  },
+  neutral: {
+    400: "#D7DBF5",
+    500: "#A9AFD9",
+    700: "#141938",
   },
   grey: {
     30: "#CCD1EE",

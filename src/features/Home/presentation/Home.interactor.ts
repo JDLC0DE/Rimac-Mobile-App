@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigation } from "expo-router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -27,6 +28,7 @@ export default function useHomeInteractor() {
     },
     resolver: yupResolver(schema),
   });
+  const navigation = useNavigation();
   const [isAcceptPrivacyPolicy, setIsAcceptPrivacyPolicy] = useState(false);
   const [isAcceptCommercialPolicy, setIsAcceptCommercialPolicy] =
     useState(false);
@@ -39,14 +41,14 @@ export default function useHomeInteractor() {
     setIsAcceptCommercialPolicy((prev) => !prev);
   };
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: IQuoteForm) => {
+    console.log(data);
+    navigation.navigate("plans" as never);
+  };
 
   const onPressSubmit = handleSubmit(onSubmit);
 
-  const isDisabledButton = !(
-    isAcceptPrivacyPolicy &&
-    isAcceptCommercialPolicy
-  );
+  const isDisabledButton = !(isAcceptPrivacyPolicy && isAcceptCommercialPolicy);
 
   return {
     errors,
