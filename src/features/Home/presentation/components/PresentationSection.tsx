@@ -1,7 +1,7 @@
-import { Colors } from "@/src/constants/theme";
-import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import Badge from "./Badge";
+
+import { Colors } from "@/src/constants/theme";
+import Badge from "../../../../components/atoms/Badge";
 
 export default function PresentationSection() {
   return (

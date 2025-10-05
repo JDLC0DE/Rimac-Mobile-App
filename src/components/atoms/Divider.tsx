@@ -1,5 +1,4 @@
-import { View } from "react-native";
-import { styles } from "./Divider.style";
+import { StyleSheet, View } from "react-native";
 
 type Props = {
   color?: string;
@@ -8,3 +7,9 @@ type Props = {
 export default function Divider({ color }: Props) {
   return <View style={[{ backgroundColor: color, ...styles.divider }]} />;
 }
+
+const styles = StyleSheet.create({
+  divider: {
+    height: 1,
+  },
+});

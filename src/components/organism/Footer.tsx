@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import { Colors } from '@/src/constants/theme'
 import RimacLogoV2 from '@/src/icons/RimacLogoV2'
-import Divider from '../../atoms/Divider'
+import Divider from '../atoms/Divider'
 
 export default function Footer() {
   return (
