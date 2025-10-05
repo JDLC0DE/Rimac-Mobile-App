@@ -3,12 +3,16 @@ import { Pressable, StyleSheet, Text } from "react-native";
 
 type Props = {
   title: string;
+  onPress: () => void;
+  disabled?: boolean;
 };
 
-export default function Button({ title }: Props) {
+export default function Button({ title, onPress, disabled }: Props) {
   return (
     <Pressable
+      disabled={disabled}
       style={({ pressed }) => [styles.button, { opacity: pressed ? 0.7 : 1 }]}
+      onPress={onPress}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </Pressable>

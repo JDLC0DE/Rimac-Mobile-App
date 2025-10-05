@@ -7,8 +7,12 @@ import useHomeInteractor from "./Home.interactor";
 
 export default function HomeScreen() {
   const {
+    errors,
+    control,
+    isDisabledButton,
     isAcceptPrivacyPolicy,
     isAcceptCommercialPolicy,
+    onPressSubmit,
     toggleAcceptPrivacyPolicy,
     toggleAcceptCommercialPolicy,
   } = useHomeInteractor();
@@ -18,6 +22,10 @@ export default function HomeScreen() {
       <PresentationSection />
       <Divider color={Colors.grey[30]} />
       <QuoteFormSection
+        errors={errors}
+        control={control}
+        onPressSubmit={onPressSubmit}
+        isDisabledButton={isDisabledButton}
         isAcceptPrivacyPolicy={isAcceptPrivacyPolicy}
         isAcceptCommercialPolicy={isAcceptCommercialPolicy}
         toggleAcceptPrivacyPolicy={toggleAcceptPrivacyPolicy}

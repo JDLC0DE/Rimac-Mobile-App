@@ -1,67 +1,101 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useState } from "react";
 import {
-    FlatList,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 import { Colors } from "@/src/constants/theme";
+import { Controller } from "react-hook-form";
 
 type Props = {
   options: Record<"value" | "label", string>[];
   label: string;
+  name: string;
+  rules?: object;
+  control: any;
+  errors: any;
 };
 
-export default function InputGroup({ options, label }: Props) {
+export default function InputGroup({
+  name,
+  label,
+  rules,
+  options,
+  errors,
+  control,
+}: Props) {
   const [open, setOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
-  const handlePressOption = (option: Props["options"][number]) => {
-    setSelectedOption(option);
-    setOpen(false);
-  };
-
   return (
-    <View style={styles.container}>
-      <View style={styles.select}>
-        <Text style={styles.selectLabel}>{selectedOption.label}</Text>
-        <TouchableOpacity onPress={() => setOpen((prev) => !prev)}>
-          <MaterialIcons
-            name={open ? "keyboard-arrow-up" : "keyboard-arrow-down"}
-            size={24}
-            color="black"
-          />
-        </TouchableOpacity>
-        {open ? (
-          <FlatList
-            scrollEnabled={false}
-            data={options}
-            style={styles.optionsContainer}
-            keyExtractor={(item) => item.value}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                activeOpacity={0.7}
-                hitSlop={10}
-                onPress={() => handlePressOption(item)}
-              >
-                <Text style={styles.selectOption}>{item.label}</Text>
+    <Controller
+      control={control}
+      rules={rules}
+      name={name}
+      render={({ field: { onChange, onBlur, value } }) => (
+        <View>
+          <View style={styles.container}>
+            <View style={styles.select}>
+              <Text style={styles.selectLabel}>{selectedOption.label}</Text>
+              <TouchableOpacity onPress={() => setOpen((prev) => !prev)}>
+                <MaterialIcons
+                  name={open ? "keyboard-arrow-up" : "keyboard-arrow-down"}
+                  size={24}
+                  color="black"
+                />
               </TouchableOpacity>
-            )}
-            ItemSeparatorComponent={() => (
-              <View style={styles.selectOptionDivider} />
-            )}
-          />
-        ) : null}
-      </View>
-      <View style={styles.input}>
-        <Text style={styles.inputLabel}>{label}</Text>
-        <TextInput style={styles.inputField} />
-      </View>
-    </View>
+              {open ? (
+                <FlatList
+                  scrollEnabled={false}
+                  data={options}
+                  style={styles.optionsContainer}
+                  keyExtractor={(item) => item.value}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      hitSlop={10}
+                      onPress={() => {
+                        setSelectedOption(item);
+                        setOpen(false);
+                        onChange(
+                          `${item.value} | ${
+                            value ? value.split(" | ")[1] : ""
+                          }`
+                        );
+                      }}
+                    >
+                      <Text style={styles.selectOption}>{item.label}</Text>
+                    </TouchableOpacity>
+                  )}
+                  ItemSeparatorComponent={() => (
+                    <View style={styles.selectOptionDivider} />
+                  )}
+                />
+              ) : null}
+            </View>
+            <View style={styles.input}>
+              <Text style={styles.inputLabel}>{label}</Text>
+              <TextInput
+                style={styles.inputField}
+                onBlur={onBlur}
+                onChangeText={(text) =>
+                  onChange(`${selectedOption.value} | ${text}`)
+                }
+                value={value ? value.split(" | ")[1] : ""}
+              />
+            </View>
+          </View>
+          {errors[name] && (
+            <Text style={styles.errorMsg}>{errors[name].message}</Text>
+          )}
+        </View>
+      )}
+    />
   );
 }
 
@@ -124,5 +158,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "400",
     color: Colors.grey[100],
+  },
+  errorMsg: {
+    color: Colors.primary,
+    fontSize: 12,
+    marginTop: 4,
   },
 });
