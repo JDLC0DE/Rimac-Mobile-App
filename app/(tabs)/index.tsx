@@ -1,13 +1,5 @@
-import { Text, View } from "react-native";
+import HomeScreen from "@/src/features/Home/presentation/Home.screen";
 
-import MainLayout from "@/src/components/layouts/MainLayout";
-
-export default function HomeScreen() {
-  return (
-    <MainLayout>
-      <View style={{flex: 1}}>
-        <Text>Home Screen</Text>
-      </View>
-    </MainLayout>
-  );
+export default function HomeTab() {
+  return <HomeScreen />;
 }

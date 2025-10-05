@@ -20,7 +20,7 @@ export default function MainLayout({ children }: Props) {
         }}
       />
       <Header />
-      <ScrollView style={{ backgroundColor: "white", flex: 1 }}>
+      <ScrollView style={{ backgroundColor: "white", flex: 1, paddingHorizontal: 24 }}>
         {children}
       </ScrollView>
       <Image

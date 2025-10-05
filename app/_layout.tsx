@@ -2,7 +2,7 @@ import { Colors } from "@/src/constants/theme";
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import "react-native-reanimated";
 import {
   SafeAreaProvider,
@@ -23,14 +23,14 @@ export default function RootLayout() {
           style={{
             flex: 1,
             paddingTop: insets.top,
-            // paddingBottom: insets.bottom,
-            backgroundColor: Colors.common.white,
+            paddingBottom: Platform.OS === "ios" ? 0 : insets.bottom,
+            backgroundColor: Colors.grey[100],
           }}
         >
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           </Stack>
-          <StatusBar style="dark" />
+          <StatusBar style="light" />
         </View>
       </SafeAreaProvider>
     </ThemeProvider>

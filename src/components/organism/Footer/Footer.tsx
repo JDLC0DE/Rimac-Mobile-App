@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import { Colors } from '@/src/constants/theme'
 import RimacLogoV2 from '@/src/icons/RimacLogoV2'
+import Divider from '../../atoms/Divider'
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
       <View style={styles.logo}>
         <RimacLogoV2 />
       </View>
-      <View style={styles.divider} />
+      <Divider color={Colors.grey[80]} />
       <Text style={styles.text}>© 2023 RIMAC Seguros y Reaseguros.</Text>
     </View>
   )
@@ -26,10 +27,6 @@ const styles = StyleSheet.create({
   logo: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  divider: {
-    height: 1,
-    backgroundColor: Colors.grey[80],
   },
   text: {
     color: Colors.common.white,
