@@ -10,6 +10,7 @@ import { StyleSheet, Text, View } from "react-native";
 type Props = {
   control: any;
   errors: any;
+  isLoading?: boolean;
   isDisabledButton: boolean;
   onPressSubmit: () => void;
   isAcceptPrivacyPolicy: boolean;
@@ -21,6 +22,7 @@ type Props = {
 export default function QuoteFormSection({
   control,
   errors,
+  isLoading,
   onPressSubmit,
   isDisabledButton,
   isAcceptPrivacyPolicy,
@@ -65,7 +67,7 @@ export default function QuoteFormSection({
         <Text style={styles.terms}>Aplican Términos y Condiciones.</Text>
       </View>
       <Button
-        title="Cotiza aquí"
+        title={isLoading ? "Cargando..." : "Cotiza aquí"}
         onPress={onPressSubmit}
         disabled={isDisabledButton}
       />

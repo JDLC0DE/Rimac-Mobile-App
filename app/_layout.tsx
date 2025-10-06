@@ -1,4 +1,5 @@
 import { Colors } from "@/src/constants/theme";
+import { UserProvider } from "@/src/context/user.context";
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -18,21 +19,23 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={DefaultTheme}>
-      <SafeAreaProvider>
-        <View
-          style={{
-            flex: 1,
-            paddingTop: insets.top,
-            paddingBottom: Platform.OS === "ios" ? 0 : insets.bottom,
-            backgroundColor: Colors.grey[100],
-          }}
-        >
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          </Stack>
-          <StatusBar style="light" />
-        </View>
-      </SafeAreaProvider>
+      <UserProvider>
+        <SafeAreaProvider>
+          <View
+            style={{
+              flex: 1,
+              paddingTop: insets.top,
+              paddingBottom: Platform.OS === "ios" ? 0 : insets.bottom,
+              backgroundColor: Colors.grey[100],
+            }}
+          >
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            </Stack>
+            <StatusBar style="light" />
+          </View>
+        </SafeAreaProvider>
+      </UserProvider>
     </ThemeProvider>
   );
 }

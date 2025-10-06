@@ -39,16 +39,33 @@ const data = [
 ];
 
 export default function PlansScreen() {
-  const { onPressPlan } = usePlansInteractor();
+  const {
+    isForMe,
+    isOther,
+    userData,
+    selectedQuote,
+    onPressPlan,
+    onPressForMe,
+    onPressForOther,
+  } = usePlansInteractor();
 
   return (
     <MainLayout gradient={false} footer={false} steps>
-      <Text style={styles.title}>Rocío ¿Para quién deseas cotizar?</Text>
+      <Text style={styles.title}>
+        {userData.name} ¿Para quién deseas cotizar?
+      </Text>
       <Text style={styles.subtitle}>
         Selecciona la opción que se ajuste más a tus necesidades.
       </Text>
-      <QuoteList />
-      <PlansList onPressPlan={onPressPlan} data={data} />
+      <QuoteList
+        isForMe={isForMe}
+        isOther={isOther}
+        onPressForMe={onPressForMe}
+        onPressForOther={onPressForOther}
+      />
+      {selectedQuote ? (
+        <PlansList onPressPlan={onPressPlan} data={data} />
+      ) : null}
     </MainLayout>
   );
 }

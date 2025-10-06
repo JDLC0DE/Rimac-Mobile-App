@@ -1,13 +1,14 @@
 import { Colors } from "@/src/constants/theme";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
   title: string;
   description: string;
   selected?: boolean;
   Icon: React.ReactElement;
+  onPressQuote?: () => void;
 };
 
 export default function QuoteCard({
@@ -15,38 +16,42 @@ export default function QuoteCard({
   description,
   selected,
   Icon,
+  onPressQuote,
 }: Props) {
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          borderWidth: selected ? 3 : 0,
-          borderColor: selected ? Colors.neutral[700] : "transparent",
-        },
-      ]}
-    >
-      <View style={styles.check}>
-        {selected ? (
-          <MaterialCommunityIcons
-            name="check-circle"
-            size={24}
-            color={Colors.success}
-          />
-        ) : (
-          <FontAwesome
-            name="circle-thin"
-            size={24}
-            color={Colors.neutral[500]}
-          />
-        )}
+    <TouchableOpacity activeOpacity={0.7} hitSlop={20} onPress={onPressQuote}>
+      <View
+        style={[
+          styles.container,
+          {
+            borderWidth: selected ? 3 : 0,
+            borderColor: selected ? Colors.neutral[700] : "transparent",
+          },
+        ]}
+      >
+        <View style={styles.check}>
+          {selected ? (
+            <MaterialCommunityIcons
+              name="check-circle"
+              size={24}
+              color={Colors.success}
+            />
+          ) : (
+            <FontAwesome
+              name="circle-thin"
+              size={24}
+              color={Colors.neutral[500]}
+            />
+          )}
+        </View>
+
+        <View style={styles.titleContainer}>
+          {Icon}
+          <Text style={styles.titleText}>{title}</Text>
+        </View>
+        <Text style={styles.descriptionText}>{description}</Text>
       </View>
-      <View style={styles.titleContainer}>
-        {Icon}
-        <Text style={styles.titleText}>{title}</Text>
-      </View>
-      <Text style={styles.descriptionText}>{description}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 
