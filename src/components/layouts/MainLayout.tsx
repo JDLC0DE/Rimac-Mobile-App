@@ -10,10 +10,12 @@ type Props = {
   gradient?: boolean;
   footer?: boolean;
   steps?: boolean;
+  currentStep?: number;
 };
 
 export default function MainLayout({
   children,
+  currentStep = 1,
   gradient = true,
   footer = true,
   steps = false,
@@ -39,7 +41,7 @@ export default function MainLayout({
       {steps ? (
         <View style={{ marginBottom: 32 }}>
           <View style={{ paddingHorizontal: 24 }}>
-            <Steps totalSteps={2} currentStep={1} />
+            <Steps totalSteps={2} currentStep={currentStep} />
           </View>
           <Divider color={Colors.grey[30]} />
         </View>

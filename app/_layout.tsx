@@ -1,4 +1,6 @@
 import { Colors } from "@/src/constants/theme";
+import { OverviewProvider } from "@/src/context/overview.context";
+import { PlansProvider } from "@/src/context/plans.context";
 import { UserProvider } from "@/src/context/user.context";
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
@@ -20,21 +22,28 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <UserProvider>
-        <SafeAreaProvider>
-          <View
-            style={{
-              flex: 1,
-              paddingTop: insets.top,
-              paddingBottom: Platform.OS === "ios" ? 0 : insets.bottom,
-              backgroundColor: Colors.grey[100],
-            }}
-          >
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            </Stack>
-            <StatusBar style="light" />
-          </View>
-        </SafeAreaProvider>
+        <PlansProvider>
+          <OverviewProvider>
+            <SafeAreaProvider>
+              <View
+                style={{
+                  flex: 1,
+                  paddingTop: insets.top,
+                  paddingBottom: Platform.OS === "ios" ? 0 : insets.bottom,
+                  backgroundColor: Colors.grey[100],
+                }}
+              >
+                <Stack>
+                  <Stack.Screen
+                    name="(tabs)"
+                    options={{ headerShown: false }}
+                  />
+                </Stack>
+                <StatusBar style="light" />
+              </View>
+            </SafeAreaProvider>
+          </OverviewProvider>
+        </PlansProvider>
       </UserProvider>
     </ThemeProvider>
   );

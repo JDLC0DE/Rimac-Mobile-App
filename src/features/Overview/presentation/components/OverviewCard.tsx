@@ -3,24 +3,44 @@ import { Colors } from "@/src/constants/theme";
 import FamilyIcon from "@/src/icons/FamilyIcon";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function OverviewCard() {
+type Props = {
+  userName: string;
+  documentType: string;
+  documentNumber: string;
+  phoneNumber: string;
+  planName: string;
+  planCost: string;
+};
+
+export default function OverviewCard({
+  userName,
+  documentType,
+  documentNumber,
+  phoneNumber,
+  planName,
+  planCost,
+}: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.headerTitle}>Precios calculados para:</Text>
       <View style={styles.userContainer}>
         <FamilyIcon />
-        <Text style={styles.user}>Rocio Miranda Díaz</Text>
+        <Text style={styles.user}>{userName}</Text>
       </View>
       <Divider color={Colors.grey[30]} />
       <View style={styles.details}>
         <Text style={styles.detailTitle}>Responsable de pago</Text>
-        <Text style={styles.detailItem}>DNI: 444888888</Text>
-        <Text style={styles.detailItem}>Celular: 5130216147</Text>
+        <Text style={styles.detailItem}>
+          {documentType}: {documentNumber}
+        </Text>
+        <Text style={styles.detailItem}>Celular: {phoneNumber}</Text>
       </View>
       <View style={styles.details}>
         <Text style={styles.detailTitle}>Plan elegido</Text>
-        <Text style={styles.detailItem}>Plan en Casa y Clínica</Text>
-        <Text style={styles.detailItem}>Costo del Plan: $99 al mes</Text>
+        <Text style={styles.detailItem}>{planName}</Text>
+        <Text style={styles.detailItem}>
+          Costo del Plan: ${planCost} al mes
+        </Text>
       </View>
     </View>
   );
@@ -70,12 +90,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
     lineHeight: 24,
-    color: Colors.neutral[700]
+    color: Colors.neutral[700],
   },
   detailItem: {
     fontSize: 14,
     fontWeight: "400",
     lineHeight: 24,
-    color: Colors.neutral[700]
+    color: Colors.neutral[700],
   },
 });

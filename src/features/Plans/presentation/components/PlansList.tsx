@@ -15,7 +15,7 @@ const { width } = Dimensions.get("window");
 
 type Props = {
   data: any[];
-  onPressPlan?: VoidFunction;
+  onPressPlan?: (data: any) => void;
 }
 
 export default function PlansList({ data, onPressPlan }: Props) {
@@ -66,7 +66,7 @@ export default function PlansList({ data, onPressPlan }: Props) {
               title={item.name}
               price={item.price}
               description={item.description}
-              onPressPlan={onPressPlan}
+              onPressPlan={() => onPressPlan?.(item)}
             />
           </View>
         )}
