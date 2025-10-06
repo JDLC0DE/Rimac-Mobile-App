@@ -1,6 +1,7 @@
 import MainLayout from "@/src/components/layouts/MainLayout";
 import { Colors } from "@/src/constants/theme";
 import { StyleSheet, Text } from "react-native";
+import PlansList from "./components/PlansList";
 import QuoteList from "./components/QuoteList";
 
 export default function PlansScreen() {
@@ -11,6 +12,7 @@ export default function PlansScreen() {
         Selecciona la opción que se ajuste más a tus necesidades.
       </Text>
       <QuoteList />
+      <PlansList />
     </MainLayout>
   );
 }

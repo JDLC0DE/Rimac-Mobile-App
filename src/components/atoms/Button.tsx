@@ -3,15 +3,24 @@ import { Pressable, StyleSheet, Text } from "react-native";
 
 type Props = {
   title: string;
-  onPress: () => void;
+  onPress?: () => void;
   disabled?: boolean;
+  bgColor?: string;
 };
 
-export default function Button({ title, onPress, disabled }: Props) {
+export default function Button({
+  title,
+  onPress,
+  disabled,
+  bgColor = Colors.grey[100],
+}: Props) {
   return (
     <Pressable
       disabled={disabled}
-      style={({ pressed }) => [styles.button, { opacity: pressed ? 0.7 : 1 }]}
+      style={({ pressed }) => [
+        styles.button,
+        { opacity: pressed ? 0.7 : 1, backgroundColor: bgColor },
+      ]}
       onPress={onPress}
     >
       <Text style={styles.buttonText}>{title}</Text>
@@ -24,7 +33,6 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     paddingHorizontal: 24,
     width: "100%",
-    backgroundColor: Colors.grey[100],
     borderRadius: 40,
     alignItems: "center",
     justifyContent: "center",
