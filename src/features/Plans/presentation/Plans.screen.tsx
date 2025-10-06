@@ -3,8 +3,44 @@ import { Colors } from "@/src/constants/theme";
 import { StyleSheet, Text } from "react-native";
 import PlansList from "./components/PlansList";
 import QuoteList from "./components/QuoteList";
+import usePlansInteractor from "./Plans.interactor";
+
+const data = [
+  {
+    id: "1",
+    name: "Plan en Casa",
+    price: 39,
+    description: [
+      "Médico general a domicilio por S/20 y medicinas cubiertas al 100%.",
+      "Videoconsulta y orientación telefónica  al 100% en medicina general + pediatría.",
+      "Indemnización de S/300 en caso de hospitalización por más de un día.",
+    ],
+  },
+  {
+    id: "2",
+    name: "Plan en Casa y Clínica",
+    price: 99,
+    description: [
+      "Consultas en clínica para cualquier especialidad.",
+      "Medicinas y exámenes derivados cubiertos al 80%.",
+      "Atención médica en más de 200 clínicas del país.",
+    ],
+  },
+  {
+    id: "3",
+    name: "Plan en Casa + Chequeo ",
+    price: 49,
+    description: [
+      "Videoconsulta con especialistas de psicología y nutrición.",
+      "Acceso a videos y recursos sobre bienestar.",
+      "Incluye todos los beneficios del Plan en Casa.",
+    ],
+  },
+];
 
 export default function PlansScreen() {
+  const { onPressPlan } = usePlansInteractor();
+
   return (
     <MainLayout gradient={false} footer={false} steps>
       <Text style={styles.title}>Rocío ¿Para quién deseas cotizar?</Text>
@@ -12,7 +48,7 @@ export default function PlansScreen() {
         Selecciona la opción que se ajuste más a tus necesidades.
       </Text>
       <QuoteList />
-      <PlansList />
+      <PlansList onPressPlan={onPressPlan} data={data} />
     </MainLayout>
   );
 }

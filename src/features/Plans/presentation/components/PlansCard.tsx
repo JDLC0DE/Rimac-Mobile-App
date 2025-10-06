@@ -8,9 +8,15 @@ type Props = {
   title: string;
   price: number;
   description: string[];
+  onPressPlan?: () => void;
 };
 
-export default function PlansCard({ title, price, description }: Props) {
+export default function PlansCard({
+  title,
+  price,
+  description,
+  onPressPlan,
+}: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.headerTitle}>
@@ -29,7 +35,11 @@ export default function PlansCard({ title, price, description }: Props) {
         ))}
       </View>
       <View style={{ marginTop: "auto" }}>
-        <Button title="Seleccionar plan" bgColor={Colors.redRimac} />
+        <Button
+          title="Seleccionar plan"
+          bgColor={Colors.redRimac}
+          onPress={onPressPlan}
+        />
       </View>
     </View>
   );
